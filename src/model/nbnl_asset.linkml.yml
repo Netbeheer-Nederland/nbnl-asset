@@ -2,20 +2,266 @@ id: https://modellen.netbeheernederland.nl/nbnl-asset
 name: nbnl-asset
 description: |-
     Information model for the data product "NBNL Asset"
-title: Asset
+title: NBNL Asset
 license: https://www.apache.org/licenses/LICENSE-2.0.txt
 imports:
 - linkml:types
 prefixes:
   linkml: https://w3id.org/linkml/
   cim: https://cim.ucaiug.io/ns#
+  ck: http://data.netbeheernederland.nl/capaciteitskaart/def#
   dcterms: http://purl.org/dc/terms/
   nbnl-term: https://begrippen.netbeheernederland.nl/id/
+  nl: https://cim.ucaiug.io/ns/nl#
   unit: http://qudt.org/vocab/unit/
+  vocab: https://modellen.netbeheernederland.nl/nbnl-asset
 annotations:
   model_uri: https://modellen.netbeheernederland.nl/nbnl-asset
   exchange_format: application/ld+json
   model_type: data-product
-types: {}
-enums: {}
-classes: {}
+enums:
+  WorkStatusKind:
+    description: Kind of status, specific to work.
+    from_schema: https://cim.ucaiug.io/ns#TC57CIM.IEC61968
+    enum_uri: cim:WorkStatusKind
+    permissible_values:
+      approved:
+        description: Initiatiefase.
+        meaning: cim:WorkStatusKind.approved
+      scheduled:
+        description: Definitie- en ontwerpfase.
+        meaning: cim:WorkStatusKind.scheduled
+      inProgress:
+        description: Uitvoeringsfase.
+        meaning: cim:WorkStatusKind.inProgress
+  WorkTimeScheduleKind:
+    description: Kind of work schedule.
+    from_schema: https://cim.ucaiug.io/ns#TC57CIM.IEC61968
+    enum_uri: cim:WorkTimeScheduleKind
+    permissible_values:
+      actual:
+        meaning: cim:WorkTimeScheduleKind.actual
+      earliest:
+        meaning: cim:WorkTimeScheduleKind.earliest
+      estimate:
+        meaning: cim:WorkTimeScheduleKind.estimate
+      immediate:
+        meaning: cim:WorkTimeScheduleKind.immediate
+      latest:
+        meaning: cim:WorkTimeScheduleKind.latest
+      request:
+        meaning: cim:WorkTimeScheduleKind.request
+classes:
+  WorkTask:
+    description: A task within a set of work.
+    from_schema: https://cim.ucaiug.io/ns#TC57CIM.IEC61968.Work
+    is_a: BaseWork
+    attributes:
+      Work:
+        description: Work this task belongs to.
+        slot_uri: cim:WorkTask.Work
+        range: Work
+        required: true
+        multivalued: false
+    class_uri: cim:WorkTask
+  Work:
+    description: Document used to request, initiate, track and record work.
+    from_schema: https://cim.ucaiug.io/ns#TC57CIM.IEC61968.Work
+    is_a: BaseWork
+    attributes:
+      workOrderNumber:
+        description: Work order number (or other unique identifying information) for
+          this work.
+        slot_uri: cim:Work.workOrderNumber
+        range: string
+        required: false
+        multivalued: false
+      Project:
+        slot_uri: cim:Work.Project
+        range: Project
+        required: false
+        multivalued: false
+    exact_mappings:
+    - vocab:netuitbreiding
+    class_uri: cim:Work
+  BaseWork:
+    description: Common representation for work and work tasks.
+    from_schema: https://cim.ucaiug.io/ns#TC57CIM.IEC61968.Work
+    is_a: Document
+    attributes:
+      statusKind:
+        description: Kind of work status.
+        slot_uri: cim:BaseWork.statusKind
+        range: WorkStatusKind
+        required: false
+        multivalued: false
+      WorkLocation:
+        description: Location for this work/task.
+        slot_uri: cim:BaseWork.WorkLocation
+        range: curie
+        required: false
+        multivalued: false
+      TimeSchedules:
+        description: All time schedules for this work or work task.
+        slot_uri: cim:BaseWork.TimeSchedules
+        multivalued: true
+        range: WorkTimeSchedule
+        required: true
+    abstract: true
+    class_uri: cim:BaseWork
+  WorkTimeSchedule:
+    description: Time schedule specific to work.
+    from_schema: https://cim.ucaiug.io/ns#TC57CIM.IEC61968.Work
+    is_a: TimeSchedule
+    class_uri: cim:WorkTimeSchedule
+  TimeSchedule:
+    class_uri: cim:TimeSchedule
+    is_a: Document
+    from_schema: https://cim.ucaiug.io/ns#TC57CIM.IEC61968.Common
+    description: "Description of anything that changes through time. Time schedule\
+      \ is used to perform a single-valued function of time. Use inherited 'type'\
+      \ attribute to give additional information on this schedule, such as: periodic\
+      \ (hourly, daily, weekly, monthly, etc.), day of the month, by date, calendar\
+      \ (specific times and dates).\r\n"
+    attributes:
+      scheduleInterval:
+        slot_uri: cim:TimeSchedule.scheduleInterval
+        range: DateTimeInterval
+        required: false
+        multivalued: false
+        description: Schedule date and time interval.
+  DateTimeInterval:
+    class_uri: cim:DateTimeInterval
+    from_schema: https://cim.ucaiug.io/ns#TC57CIM.IEC61970.Base.Domain
+    description: 'Interval between two date and time points, where the interval includes
+      the start time but excludes end time.  '
+    attributes:
+      end:
+        slot_uri: cim:DateTimeInterval.end
+        range: date
+        required: false
+        multivalued: false
+        description: End date and time of this interval.  The end date and time where
+          the interval is defined up to, but excluded.
+      start:
+        slot_uri: cim:DateTimeInterval.start
+        range: date
+        required: false
+        multivalued: false
+        description: Start date and time of this interval.  The start date and time
+          is included in the defined interval.
+  Project:
+    description: A collection of related work. For construction projects and maintenance
+      projects, multiple phases may be performed.
+    from_schema: https://cim.ucaiug.io/ns#TC57CIM.IEC61968.InfIEC61968.InfWork
+    is_a: WorkDocument
+    attributes:
+      ParentProject:
+        slot_uri: cim:Project.ParentProject
+        range: Project
+        required: false
+        multivalued: false
+      projectURL:
+        description: URL to the project web page or portal where the project
+          information can be found.
+        range: string
+        slot_uri: vocab:Project.projectURL
+        required: false
+        multivalued: false
+        exact_mappings:
+        - ck:Work.project_url
+      source:
+        description: Source of the project information. Usually an investment
+          plan or scheduled work.
+        range: string
+        slot_uri: vocab:Project.source
+        required: false
+        multivalued: false
+        exact_mappings:
+        - ck:Work.source
+    class_uri: cim:Project
+  Document:
+    description: Parent class for different groupings of information collected and
+      managed as a part of a business process. It will frequently contain references
+      to other objects, such as assets, people and power system resources.
+    from_schema: https://cim.ucaiug.io/ns#TC57CIM.IEC61968.Common
+    is_a: IdentifiedObject
+    abstract: true
+    class_uri: cim:Document
+  WorkDocument:
+    description: Shadow class for Document, to isolate subclassing from this package.
+      If any subclass gets normative and needs inheritance, it will inherit directly
+      from Document.
+    from_schema: https://cim.ucaiug.io/ns#TC57CIM.IEC61968.InfIEC61968.InfWork
+    is_a: Document
+    abstract: true
+    class_uri: cim:WorkDocument
+  Asset:
+    description: Tangible resource of the utility, including power system equipment,
+      various end devices, cabinets, buildings, etc. For electrical network equipment,
+      the role of the asset is defined through PowerSystemResource and its subclasses,
+      defined mainly in the Wires model (refer to IEC61970-301 and model package IEC61970::Wires).
+      Asset description places emphasis on the physical characteristics of the equipment
+      fulfilling that role.
+    from_schema: https://cim.ucaiug.io/ns#TC57CIM.IEC61968.Assets
+    is_a: IdentifiedObject
+    attributes:
+      PowerSystemResources:
+        slot_uri: cim:Asset.PowerSystemResources
+        range: curie
+        required: true
+        multivalued: true
+        description: All power system resources used to electrically model this asset.
+          For example, transformer asset is electrically modelled with a transformer
+          and its windings and tap changer.
+      WorkTasks:
+        slot_uri: cim:Asset.WorkTasks
+        range: WorkTask
+        required: false
+        multivalued: true
+        description: All non-replacement work tasks performed on this asset.
+    tree_root: true
+    class_uri: cim:Asset
+  IdentifiedObject:
+    description: This is a root class to provide common identification for all classes
+      needing identification and naming attributes.
+    from_schema: https://cim.ucaiug.io/ns#TC57CIM.IEC61970.Base.Core
+    abstract: true
+    attributes:
+      description:
+        description: The description is a free human readable text describing or naming
+          the object. It may be non unique and may not correlate to a naming hierarchy.
+        slot_uri: cim:IdentifiedObject.description
+        range: string
+        required: false
+        multivalued: false
+      mRID:
+        description: "Master resource identifier issued by a model authority. The\
+          \ mRID is unique within an exchange context. Global uniqueness is easily\
+          \ achieved by using a UUID, as specified in RFC 4122, for the mRID. The\
+          \ use of UUID is strongly recommended.\r\nFor CIMXML data files in RDF syntax\
+          \ conforming to IEC 61970-552, the mRID is mapped to rdf:ID or rdf:about\
+          \ attributes that identify CIM object elements."
+        slot_uri: cim:IdentifiedObject.mRID
+        identifier: true
+        range: string
+        required: true
+        multivalued: false
+      europeanArticleNumberEAN:
+        description: The attribute is used for an exchange of the EAN code (European
+          Article Number). The length of the string is 18 characters as defined by
+          the EAN code.
+        slot_uri: nl:IdentifiedObject.europeanArticleNumberEAN
+        range: string
+        required: false
+        multivalued: false
+      name:
+        description: "The name is any free human readable and possibly non unique\
+          \ text naming the object.\r\n"
+        slot_uri: cim:IdentifiedObject.name
+        range: string
+        required: false
+        multivalued: false
+        exact_mappings:
+        - ck:Work.projectName
+    class_uri: cim:IdentifiedObject
