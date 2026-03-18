@@ -103,9 +103,8 @@ Project -> Project
 Asset -> WorkTask
 ----
 
-This data product requires the use of
-https://netbeheer-nederland.github.io/docs-dev/im-object/latest/object_register.html[NBNL
-Object Register] for instantiation of its datasets.
+This data product requires the use of an Equipment dataset for instantiation of
+its datasets.
 
 == Required background
 
