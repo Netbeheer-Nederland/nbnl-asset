@@ -14,7 +14,7 @@ prefixes:
   nbnl-term: https://begrippen.netbeheernederland.nl/id/
   nl: https://cim.ucaiug.io/ns/nl#
   unit: http://qudt.org/vocab/unit/
-  vocab: https://modellen.netbeheernederland.nl/nbnl-asset
+  vocab: https://modellen.netbeheernederland.nl/nbnl-asset/
 annotations:
   model_uri: https://modellen.netbeheernederland.nl/nbnl-asset
   exchange_format: application/ld+json
@@ -81,6 +81,15 @@ classes:
         range: Project
         required: false
         multivalued: false
+      source:
+        description: Source of the project information. Usually an investment
+          plan or scheduled work.
+        range: string
+        slot_uri: nl:Project.source
+        required: false
+        multivalued: false
+        exact_mappings:
+        - ck:Work.source
     exact_mappings:
     - vocab:netuitbreiding
     class_uri: cim:Work
@@ -151,8 +160,10 @@ classes:
         description: Start date and time of this interval.  The start date and time
           is included in the defined interval.
   Project:
-    description: A collection of related work. For construction projects and maintenance
-      projects, multiple phases may be performed.
+    description:
+      A collection of related work. For construction projects and maintenance
+      projects, multiple phases may be performed. To associate a project URL
+      (ck:Work.project_url), use Document.electronicAddress.
     from_schema: https://cim.ucaiug.io/ns#TC57CIM.IEC61968.InfIEC61968.InfWork
     is_a: WorkDocument
     attributes:
@@ -161,24 +172,6 @@ classes:
         range: Project
         required: false
         multivalued: false
-      projectURL:
-        description: URL to the project web page or portal where the project
-          information can be found.
-        range: string
-        slot_uri: vocab:Project.projectURL
-        required: false
-        multivalued: false
-        exact_mappings:
-        - ck:Work.project_url
-      source:
-        description: Source of the project information. Usually an investment
-          plan or scheduled work.
-        range: string
-        slot_uri: vocab:Project.source
-        required: false
-        multivalued: false
-        exact_mappings:
-        - ck:Work.source
     class_uri: cim:Project
   Document:
     description: Parent class for different groupings of information collected and
@@ -186,8 +179,26 @@ classes:
       to other objects, such as assets, people and power system resources.
     from_schema: https://cim.ucaiug.io/ns#TC57CIM.IEC61968.Common
     is_a: IdentifiedObject
+    attributes:
+      electronicAddress:
+        slot_uri: cim:Document.electronicAddress
+        range: ElectronicAddress
+        required: false
+        multivalued: false
+        description: Electronic address.
     abstract: true
     class_uri: cim:Document
+  ElectronicAddress:
+    description: Electronic address information.
+    from_schema: https://cim.ucaiug.io/ns#TC57CIM.IEC61968.Common
+    attributes:
+      web:
+        slot_uri: cim:ElectronicAddress.web
+        range: string
+        required: false
+        multivalued: false
+        description: "World wide web address."
+    class_uri: cim:ElectronicAddress
   WorkDocument:
     description: Shadow class for Document, to isolate subclassing from this package.
       If any subclass gets normative and needs inheritance, it will inherit directly
@@ -196,6 +207,22 @@ classes:
     is_a: Document
     abstract: true
     class_uri: cim:WorkDocument
+  CongestionDocument:
+    description: Additional information about the contingency. Allows
+      free-format text and a link to additional information, such as a
+      congestion report. Use Document.electronicAddress to associate an URL
+      with a specific Contingency.
+    is_a: Document
+    attributes:
+      Contingency:
+        description: A contingency info belongs to one contingency.
+        slot_uri: nl:CongestionDocument.Contingency
+        range: curie
+        required: true
+        multivalued: false
+    exact_mappings:
+    - ck:CongestionInfo
+    class_uri: nl:CongestionDocument
   Asset:
     description: Tangible resource of the utility, including power system equipment,
       various end devices, cabinets, buildings, etc. For electrical network equipment,

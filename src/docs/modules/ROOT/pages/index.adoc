@@ -88,6 +88,7 @@ legend: "" {
 }
 
 Asset.class: enterprise
+CongestionDocument.class: enterprise
 DateTimeInterval.class: grid
 Project.class: enterprise
 Work.class: enterprise
