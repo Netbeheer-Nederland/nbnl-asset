@@ -85,7 +85,7 @@ classes:
         description: Source of the project information. Usually an investment
           plan or scheduled work.
         range: string
-        slot_uri: nl:Project.source
+        slot_uri: nl:Work.source
         required: false
         multivalued: false
         exact_mappings:
@@ -115,7 +115,7 @@ classes:
         slot_uri: cim:BaseWork.TimeSchedules
         multivalued: true
         range: WorkTimeSchedule
-        required: true
+        required: false
     abstract: true
     class_uri: cim:BaseWork
   WorkTimeSchedule:
@@ -148,7 +148,7 @@ classes:
       end:
         slot_uri: cim:DateTimeInterval.end
         range: date
-        required: false
+        required: true
         multivalued: false
         description: End date and time of this interval.  The end date and time where
           the interval is defined up to, but excluded.

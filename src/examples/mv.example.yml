@@ -1,0 +1,97 @@
+'@context':
+  linkml: https://w3id.org/linkml/
+  cim: https://cim.ucaiug.io/ns#
+  dct: http://purl.org/dc/terms/
+  gh: https://github.com/
+  cbs: https://www.cbs.nl/nl-nl/onze-diensten/methoden/begrippen/
+  eu: https://cim.ucaiug.io/ns/eu#
+  nbnl: https://begrippen.netbeheernederland.nl/energiesysteembeheer/nl/page/
+  nl: https://cim.ucaiug.io/ns/nl#
+  skos: http://www.w3.org/2004/02/skos/core#
+  xsd: http://www.w3.org/2001/XMLSchema#
+  github: https://github.com/
+  dcterms: http://purl.org/dc/terms/
+'@id': urn:uuid:0e3974ab-2746-4fe0-b682-4737e7a048a8
+'dcterms:title': 'Medium Voltage (MV) JSON-LD instance data'
+'dcterms:issued':
+  '@value': 2026-03-31T12:34:56Z
+  '@type': xsd:dateTime
+'dcterms:publisher':
+  '@id': urn:uuid:4f74c8e2-adb5-4815-9607-eb00fb6a0d55
+  'dcterms:title': 'Liander'
+'dcterms:references':
+  - '@id': urn:uuid:2d3088c1-2b9a-4cbc-84fa-c0670e0e8ecc
+'@graph':
+  # --- cim:Work --------------------------------------------------------------
+  - '@id': urn:uuid:566e7ede-a8e9-4e3e-93b8-384df88357d3
+    '@type': cim:Work
+    nl:Work.source: 'Investeringsplan'
+    cim:BaseWork.statusKind:
+      '@id': cim:WorkStatusKind.inProgress
+    cim:BaseWork.TimeSchedules:
+      - '@id': urn:uuid:4f252db7-fbbe-45f7-8a76-0b52f7bb9ce9
+      - '@id': urn:uuid:64b23017-854a-482e-b38f-e9cbe54448f4
+    cim:Document.electronicAddress:
+      '@id': urn:uuid:2a669ea5-9de6-4ea8-8db8-58968d7e0880
+    cim:IdentifiedObject.description: 'Uitbreiding netstation Pieterslaan'
+    cim:IdentifiedObject.mRID: 566e7ede-a8e9-4e3e-93b8-384df88357d3
+    cim:IdentifiedObject.name: 'WO#_1234_Verzwaring_Pieterslaan'
+  - '@id': urn:uuid:2a669ea5-9de6-4ea8-8db8-58968d7e0880
+    '@type': cim:ElectronicAddress
+    cim:ElectronicAddress.web: 'http://example.com/wo_1234'
+  # --- cim:Asset ----------------------------------------------------------
+  - '@id': urn:uuid:2f462fd0-bc72-4a23-a7e6-e8a0acc59357
+    '@type': cim:WorkTask
+    cim:WorkTask.Work:
+      '@id': urn:uuid:566e7ede-a8e9-4e3e-93b8-384df88357d3
+    cim:IdentifiedObject.mRID: 2f462fd0-bc72-4a23-a7e6-e8a0acc59357
+  - '@id': urn:uuid:4088c9c4-de6d-4999-a851-085db0f579dc
+    '@type': cim:Asset
+    cim:Asset.PowerSystemResources:
+      - urn:uuid:efeba515-547b-4c1a-8cd0-4cbc5f714283
+    cim:Asset.WorkTasks:
+      - '@id': urn:uuid:2f462fd0-bc72-4a23-a7e6-e8a0acc59357
+    cim:IdentifiedObject.description: 'PowerTransformer'
+    cim:IdentifiedObject.mRID: 4088c9c4-de6d-4999-a851-085db0f579dc
+    cim:IdentifiedObject.name: '20-3i'
+  # --- cim:WorkTimeSchedule (1) ----------------------------------------------
+  - '@id': urn:uuid:4f252db7-fbbe-45f7-8a76-0b52f7bb9ce9
+    '@type': cim:WorkTimeSchedule
+    cim:TimeSchedule.scheduleInterval:
+      '@id': urn:uuid:c26ca57a-8b6a-4784-9d30-d934bb67d262
+    cim:Document.electronicAddress:
+      '@id': urn:uuid:2fb94142-32e0-4df4-bc2b-6809d03bf595
+    cim:IdentifiedObject.description: 'Verwachte einddatum'
+    cim:IdentifiedObject.mRID: 4f252db7-fbbe-45f7-8a76-0b52f7bb9ce9
+  - '@id': urn:uuid:c26ca57a-8b6a-4784-9d30-d934bb67d262
+    '@type': cim:DateTimeInterval
+    cim:DateTimeInterval.end:
+      '@value': '2026-06-01'
+      '@type': xsd:date
+  - '@id': urn:uuid:2fb94142-32e0-4df4-bc2b-6809d03bf595
+    '@type': cim:ElectronicAddress
+    cim:ElectronicAddress.web: 'http://example.com/report'
+  # --- cim:WorkTimeSchedule (2) ----------------------------------------------
+  - '@id': urn:uuid:64b23017-854a-482e-b38f-e9cbe54448f4
+    '@type': cim:WorkTimeSchedule
+    cim:TimeSchedule.scheduleInterval:
+      '@id': urn:uuid:7cbd1060-55ee-4194-a69a-a8059597dc44
+    cim:IdentifiedObject.description: 'Definitieve einddatum'
+    cim:IdentifiedObject.mRID: 64b23017-854a-482e-b38f-e9cbe54448f4
+  - '@id': urn:uuid:7cbd1060-55ee-4194-a69a-a8059597dc44
+    '@type': cim:DateTimeInterval
+    cim:DateTimeInterval.end:
+      '@value': '2026-12-01'
+      '@type': xsd:date
+  # --- nl:CongestionDocument -------------------------------------------------
+  - '@id': urn:uuid:6c3f8481-0065-443f-9d9c-22dfb6aca63a
+    '@type': nl:CongestionDocument
+    nl:CongestionDocument.Contingency:
+      - urn:uuid:409bd06c-ace0-4184-9997-20a593c2d67e
+    cim:Document.electronicAddress:
+      '@id': urn:uuid:ef3bd901-1a6e-46af-95d3-bce0e33d66f7
+    cim:IdentifiedObject.description: 'Congestierapport'
+    cim:IdentifiedObject.mRID: 6c3f8481-0065-443f-9d9c-22dfb6aca63a
+  - '@id': urn:uuid:ef3bd901-1a6e-46af-95d3-bce0e33d66f7
+    '@type': cim:ElectronicAddress
+    cim:ElectronicAddress.web: 'http://example.com/congestion_report'
