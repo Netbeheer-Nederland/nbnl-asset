@@ -14,7 +14,7 @@
 '@id': urn:uuid:0e3974ab-2746-4fe0-b682-4737e7a048a8
 'dcterms:title': 'Medium Voltage (MV) JSON-LD instance data'
 'dcterms:issued':
-  '@value': 2026-03-31T12:34:56Z
+  '@value': 2026-04-02T12:34:56Z
   '@type': xsd:dateTime
 'dcterms:publisher':
   '@id': urn:uuid:4f74c8e2-adb5-4815-9607-eb00fb6a0d55
