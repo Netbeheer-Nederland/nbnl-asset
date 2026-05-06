@@ -95,13 +95,13 @@ Work.class: enterprise
 WorkTask.class: enterprise
 WorkTimeSchedule.class: enterprise
 
+WorkTask -> Asset
 WorkTask -> Work
 WorkTask -> WorkTimeSchedule
 Work -> Project
 Work -> WorkTimeSchedule
 WorkTimeSchedule -> DateTimeInterval
 Project -> Project
-Asset -> WorkTask
 ----
 
 This data product requires the use of an Equipment dataset for instantiation of

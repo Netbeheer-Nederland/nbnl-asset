@@ -42,6 +42,8 @@
   # --- cim:Asset ----------------------------------------------------------
   - '@id': urn:uuid:2f462fd0-bc72-4a23-a7e6-e8a0acc59357
     '@type': cim:WorkTask
+    cim:WorkTask.Assets:
+      - '@id': urn:uuid:4088c9c4-de6d-4999-a851-085db0f579dc
     cim:WorkTask.Work:
       '@id': urn:uuid:566e7ede-a8e9-4e3e-93b8-384df88357d3
     cim:IdentifiedObject.mRID: 2f462fd0-bc72-4a23-a7e6-e8a0acc59357
@@ -49,8 +51,6 @@
     '@type': cim:Asset
     cim:Asset.PowerSystemResources:
       - urn:uuid:efeba515-547b-4c1a-8cd0-4cbc5f714283
-    cim:Asset.WorkTasks:
-      - '@id': urn:uuid:2f462fd0-bc72-4a23-a7e6-e8a0acc59357
     cim:IdentifiedObject.description: 'PowerTransformer'
     cim:IdentifiedObject.mRID: 4088c9c4-de6d-4999-a851-085db0f579dc
     cim:IdentifiedObject.name: '20-3i'

@@ -57,6 +57,12 @@ classes:
     from_schema: https://cim.ucaiug.io/ns#TC57CIM.IEC61968.Work
     is_a: BaseWork
     attributes:
+      Assets:
+        slot_uri: cim:WorkTask.Assets
+        range: Asset
+        required: false
+        multivalued: true
+        description: All assets on which this non-replacement work task is performed.
       Work:
         description: Work this task belongs to.
         slot_uri: cim:WorkTask.Work
@@ -246,7 +252,9 @@ classes:
         range: WorkTask
         required: false
         multivalued: true
-        description: All non-replacement work tasks performed on this asset.
+        description: DEPRECATED use cim:WorkTask.Assets to associate a
+          cim:WorkTask with a cim:Asset. All non-replacement work tasks
+          performed on this asset.
     tree_root: true
     class_uri: cim:Asset
   IdentifiedObject:
