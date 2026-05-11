@@ -247,14 +247,6 @@ classes:
         description: All power system resources used to electrically model this asset.
           For example, transformer asset is electrically modelled with a transformer
           and its windings and tap changer.
-      WorkTasks:
-        slot_uri: cim:Asset.WorkTasks
-        range: WorkTask
-        required: false
-        multivalued: true
-        description: DEPRECATED use cim:WorkTask.Assets to associate a
-          cim:WorkTask with a cim:Asset. All non-replacement work tasks
-          performed on this asset.
     tree_root: true
     class_uri: cim:Asset
   IdentifiedObject:
