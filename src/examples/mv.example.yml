@@ -84,14 +84,18 @@
       '@value': '2026-12-01'
       '@type': xsd:date
   # --- nl:CongestionDocument -------------------------------------------------
-  - '@id': urn:uuid:6c3f8481-0065-443f-9d9c-22dfb6aca63a
+  - '@id': urn:uuid:670fb842-ddd8-469e-8d0e-ab0a94d521f4
+    '@type': cim:ElectronicAddress
+    cim:ElectronicAddress.web: 'http://example.com/congestion_report'
+  - '@id': urn:uuid:60a180a8-7cba-4e94-9e02-f885497dbeb8
     '@type': nl:CongestionDocument
     nl:CongestionDocument.Contingency:
       - urn:uuid:409bd06c-ace0-4184-9997-20a593c2d67e
+    nl:CongestionDocument.constraint:
+      '@id': nl:RAGKind.red
+    nl:CongestionDocument.positiveFlowIn: true
+    nl:CongestionDocument.alleviationYear: 2028
     cim:Document.electronicAddress:
-      '@id': urn:uuid:ef3bd901-1a6e-46af-95d3-bce0e33d66f7
+      '@id': urn:uuid:670fb842-ddd8-469e-8d0e-ab0a94d521f4
     cim:IdentifiedObject.description: 'Congestierapport'
-    cim:IdentifiedObject.mRID: 6c3f8481-0065-443f-9d9c-22dfb6aca63a
-  - '@id': urn:uuid:ef3bd901-1a6e-46af-95d3-bce0e33d66f7
-    '@type': cim:ElectronicAddress
-    cim:ElectronicAddress.web: 'http://example.com/congestion_report'
+    cim:IdentifiedObject.mRID: 60a180a8-7cba-4e94-9e02-f885497dbeb8
