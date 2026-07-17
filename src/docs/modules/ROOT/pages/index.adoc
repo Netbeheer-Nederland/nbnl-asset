@@ -90,18 +90,24 @@ legend: "" {
 Asset.class: enterprise
 CongestionDocument.class: enterprise
 DateTimeInterval.class: grid
+ElectronicAddress.class: enterprise
 Project.class: enterprise
 Work.class: enterprise
 WorkTask.class: enterprise
 WorkTimeSchedule.class: enterprise
 
-WorkTask -> Asset
-WorkTask -> Work
-WorkTask -> WorkTimeSchedule
-Work -> Project
-Work -> WorkTimeSchedule
-WorkTimeSchedule -> DateTimeInterval
-Project -> Project
+WorkTask -- Asset
+WorkTask -- Work
+WorkTask -- WorkTimeSchedule
+WorkTask -- ElectronicAddress
+Work -- Project
+Work -- WorkTimeSchedule
+Work -- ElectronicAddress
+WorkTimeSchedule -- DateTimeInterval
+WorkTimeSchedule -- ElectronicAddress
+Project -- Project
+Project -- ElectronicAddress
+CongestionDocument -- ElectronicAddress
 ----
 
 This data product requires the use of an Equipment dataset for instantiation of

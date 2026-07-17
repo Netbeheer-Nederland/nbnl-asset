@@ -246,6 +246,12 @@ classes:
         range: curie
         required: true
         multivalued: false
+      Location:
+        slot_uri: nl:CongestionDocument.Location
+        range: curie
+        required: false
+        multivalued: true
+        description: Geographical location for this CongestionDocument.
       constraint:
         description:
           A RAG definition of the constraints at the Contingency. Use in
