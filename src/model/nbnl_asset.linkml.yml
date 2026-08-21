@@ -20,6 +20,20 @@ annotations:
   exchange_format: application/ld+json
   model_type: data-product
 enums:
+  UpdateInfoKind:
+    description: Type of information that has been updated as part of this
+      dataset.
+    enum_uri: nl:UpdateInfoKind
+    permissible_values:
+      KI:
+        description: Kleurinformatie.
+        meaning: nl:UpdateInfoKind.KI
+      NU:
+        description: Netuitbreidingen.
+        meaning: nl:UpdateInfoKind.NU
+      CO:
+        description: Congestie opgelost.
+        meaning: nl:UpdateInfoKind.CO
   RAGKind:
     description: Traffic light colors coding scheme for categorising status.
     enum_uri: nl:RAGKind
@@ -72,6 +86,23 @@ enums:
       request:
         meaning: cim:WorkTimeScheduleKind.request
 classes:
+  UpdateInfo:
+    description: Specific type of information that was updated for this
+      dataset.
+    attributes:
+      date:
+        description: Date of the update.
+        slot_uri: nl:UpdateInfo.date
+        range: date
+        required: true
+        multivalued: false
+      type:
+        description: Type of the update.
+        slot_uri: nl:UpdateInfo.type
+        range: UpdateInfoKind
+        required: true
+        multivalued: false
+    class_uri: nl:UpdateInfo
   WorkTask:
     description: A task within a set of work.
     from_schema: https://cim.ucaiug.io/ns#TC57CIM.IEC61968.Work

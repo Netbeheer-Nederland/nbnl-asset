@@ -21,6 +21,21 @@
   'dcterms:title': 'Liander'
 'dcterms:references':
   - '@id': urn:uuid:2d3088c1-2b9a-4cbc-84fa-c0670e0e8ecc
+'nl:updated':
+  - '@id': urn:uuid:a29fa540-3ea6-4f37-a8f6-f22d6d3f8340
+    '@type': nl:UpdateInfo
+    nl:UpdateInfo.date:
+      '@value': '2026-05-08'
+      '@type': xsd:date
+    nl:UpdateInfo.type:
+      '@id': nl:UpdateInfoKind.NU
+  - '@id': urn:uuid:28e08cb5-2df4-48ee-95f0-e48961312365
+    '@type': nl:UpdateInfo
+    nl:UpdateInfo.date:
+      '@value': '2026-05-08'
+      '@type': xsd:date
+    nl:UpdateInfo.type:
+      '@id': nl:UpdateInfoKind.CO
 '@graph':
   # --- cim:Work --------------------------------------------------------------
   - '@id': urn:uuid:566e7ede-a8e9-4e3e-93b8-384df88357d3
