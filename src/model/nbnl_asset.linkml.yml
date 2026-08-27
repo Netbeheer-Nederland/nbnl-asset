@@ -20,6 +20,17 @@ annotations:
   exchange_format: application/ld+json
   model_type: data-product
 enums:
+  InterTieDirection:
+    enum_uri: cim:InterTieDirection
+    description: Direction of an intertie or queue.
+    from_schema: https://cim.ucaiug.io/ns#TC57CIM.IEC62325.MarketOperations.MktDomain
+    permissible_values:
+      E:
+        meaning: cim:InterTieDirection.E
+        description: Export from the grid, from the perspective of the system operator.
+      I:
+        meaning: cim:InterTieDirection.I
+        description: Import into the grid, from the perspective of the system operator.
   UpdateInfoKind:
     description: Type of information that has been updated as part of this
       dataset.
@@ -296,15 +307,12 @@ classes:
         exact_mappings:
         - ck:PostcodeArea.generation_constraint
         - ck:PostcodeArea.demand_constraint
-      positiveFlowIn:
-        description:
-          If true then this Contingency applies to active power, reactive power
-          or current with the convention that a positive value measured means
-          power is flowing into the related PowerSystemResource.
-        slot_uri: nl:CongestionDocument.positiveFlowIn
-        range: boolean
+      direction:
+        slot_uri: nl:CongestionDocument.direction
+        range: InterTieDirection
         required: false
         multivalued: false
+        description: "The direction of the congestion point, export or import"
       alleviationYear:
         description: Year (e.g. "2028") from which any capacity issues have
           been alleviated for the Contingency.

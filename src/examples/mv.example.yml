@@ -108,7 +108,8 @@
       - urn:uuid:409bd06c-ace0-4184-9997-20a593c2d67e
     nl:CongestionDocument.constraint:
       '@id': nl:RAGKind.red
-    nl:CongestionDocument.positiveFlowIn: true
+    nl:CongestionDocument.direction:
+      '@id': cim:InterTieDirection.E
     nl:CongestionDocument.alleviationYear: 2028
     cim:Document.electronicAddress:
       '@id': urn:uuid:670fb842-ddd8-469e-8d0e-ab0a94d521f4
